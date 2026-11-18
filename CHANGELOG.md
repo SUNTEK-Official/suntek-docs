@@ -9,4 +9,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 - Initial release of the SUNTEK Developer Documentation Portal (suntek-docs).
 - Added hardware SDK selection guide, application signing architecture guide, and hardware-catalog.json.
-- Published FL5 attendance HTTP protocol docs with Python mock test server, peripheral serial guides, N150 Windows driver index, and Ubuntu CUPS printer setup guide.
+- Published FL5 attendance HTTP protocol docs with Python mock test server, peripheral serial guides, Windows (Intel N150) driver index, and Ubuntu CUPS printer setup guide.

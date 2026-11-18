@@ -17,7 +17,7 @@
   <p>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-172A88?style=for-the-badge" alt="License"></a>
     <img src="https://img.shields.io/badge/Docs-Pure_English-2563EB?style=for-the-badge" alt="Language">
-    <a href="./hardware-catalog.json"><img src="https://img.shields.io/badge/Catalog-20_Models-F39800?style=for-the-badge" alt="Catalog"></a>
+    <a href="./hardware-catalog.json"><img src="https://img.shields.io/badge/Catalog-19_Models-F39800?style=for-the-badge" alt="Catalog"></a>
     <a href="https://www.suntekai.com"><img src="https://img.shields.io/badge/Website-suntekai.com-18339F?style=for-the-badge" alt="Website"></a>
   </p>
 
@@ -49,8 +49,8 @@
     </td>
     <td width="50%" valign="top">
       <h3>Windows &amp; Linux Drivers</h3>
-      <p>N150 Tablet POS Windows EV-signed driver catalog (SHA-256 verified) and Ubuntu CUPS raw USB receipt printing guide.</p>
-      <a href="./docs/drivers/tablet-pos-n150-windows-drivers.md">N150 Drivers</a> &middot; <a href="./docs/linux/ubuntu-cups-usb-thermal-printer.md">Ubuntu CUPS</a>
+      <p>Windows Tablet/POS platform driver catalog (Intel Processor N150, SHA-256 verified) and Ubuntu CUPS raw USB receipt printing guide.</p>
+      <a href="./docs/drivers/tablet-pos-n150-windows-drivers.md">Windows Drivers (Intel N150)</a> &middot; <a href="./docs/linux/ubuntu-cups-usb-thermal-printer.md">Ubuntu CUPS</a>
     </td>
   </tr>
 </table>
@@ -75,7 +75,7 @@ flowchart LR
 - [`docs/protocols/fl5-attendance-http-protocol.md`](./docs/protocols/fl5-attendance-http-protocol.md) — FL5 attendance & access control HTTP protocol
 - [`docs/peripherals/scanner-fill-light-commands.md`](./docs/peripherals/scanner-fill-light-commands.md) — Barcode scanner fill-light control commands
 - [`docs/peripherals/kiosk-led-serial-hex-protocol.md`](./docs/peripherals/kiosk-led-serial-hex-protocol.md) — Serial LED status light HEX protocol (`/dev/ttyS5`, 9600 bps)
-- [`docs/drivers/tablet-pos-n150-windows-drivers.md`](./docs/drivers/tablet-pos-n150-windows-drivers.md) — N150 Tablet POS Windows driver package index
+- [`docs/drivers/tablet-pos-n150-windows-drivers.md`](./docs/drivers/tablet-pos-n150-windows-drivers.md) — Windows Tablet/POS driver package index (Intel Processor N150)
 - [`docs/linux/ubuntu-cups-usb-thermal-printer.md`](./docs/linux/ubuntu-cups-usb-thermal-printer.md) — Ubuntu Linux CUPS raw USB printer setup guide
 - [`hardware-catalog.json`](./hardware-catalog.json) — Machine-readable model-to-SDK catalog
 - [`tools/fl5-protocol-mock-server/`](./tools/fl5-protocol-mock-server) — Python mock HTTP server for FL5 integration testing

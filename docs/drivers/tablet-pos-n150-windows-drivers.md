@@ -1,4 +1,4 @@
-# N150 Driver Package
+# Windows Tablet/POS Driver Package (Intel Processor N150)
 
 A complete driver collection for **Intel Alder Lake-N N150** based tablet/POS devices, covering chipset, graphics, audio, camera, wireless, sensors, and peripherals.
 

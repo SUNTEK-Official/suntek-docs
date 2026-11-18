@@ -39,14 +39,6 @@
       ],
       "signing": "Network Protocol Only (No App Signing Needed)"
     },
-    "N150": {
-      "category": "Tablet POS (Win)",
-      "sdk_repo": "suntek-docs",
-      "variants": [
-        "Windows 11 Drivers"
-      ],
-      "signing": "EV Signed Windows Drivers in Releases"
-    },
     "SK1": {
       "category": "Self-Service Kiosk",
       "sdk_repo": "suntek-sdk-sc1-sk1",
