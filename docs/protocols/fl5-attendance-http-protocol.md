@@ -95,9 +95,13 @@ Here, trans_id is the task identifier, which is used to determine which instruct
 
 This process is illustrated in Figure 2-1 .
 
+![FL5 Attendance & Access Control HTTP Protocol Specification - fl5-image1.png](./images/fl5-image1.png)
+
 Figure 2-1. Communication flow during instruction processing
 
 If the data packets that the device needs to upload are very large, packet-by-packet transmission may be used. The transmission process is shown in Figure 2-2. For details, please refer to the instructions.
+
+![FL5 Attendance & Access Control HTTP Protocol Specification - fl5-image2.png](./images/fl5-image2.png)
 
 Figure 2-2. Communication flow during instruction processing
 
@@ -134,7 +138,7 @@ At this point, the HTTP header should contain the following fields .
 | request _code | Requirement Code | yes | It must be a string like the one below .<br>" receive_cmd " | This indicates that the machine is asking the server if it has sent any instructions to itself. |
 | dev_id | Machine Identification Number | yes | English and numbers , maximum 24 characters . | connected to the same web server must have a unique identification number .<br>This parameter refers to the unique number of the time and attendance machine . |
 | dev_model | Used to distinguish equipment types | yes | English numbers<br>Maximum 16 bits | Device type; depending on the type, the protocol used by the device may be different. |
-| token​ | Device access token | yes | MD5( dev_id) + key) | The manufacturer will issue a unique key to each developer. The corresponding device will then perform an MD5 hash of this key and the device's unique identifier. Developers can verify the accuracy of this signature on the server side to determine the legitimacy of the device. |
+| token | Device access token | yes | MD5( dev_id) + key) | The manufacturer will issue a unique key to each developer. The corresponding device will then perform an MD5 hash of this key and the device's unique identifier. Developers can verify the accuracy of this signature on the server side to determine the legitimacy of the device. |
 
 For example: HTTP headers are uploaded from the machine to the server:
 
@@ -147,11 +151,11 @@ The data placed in the HTTP body section as described in 1.3.
 
 The content of the string placed in the Body section is as follows .
 
+```json
 {
-
-" time " : <1> ,​
-
+  " time " : <1> ,
 }
+```
 
 See section 3.2.1 for details on device heartbeat.
 
@@ -193,8 +197,8 @@ The following fields should be placed in the request header at this time.
 | request_code | Required code | yes | It must be a string like the one below .<br>" send_cmd_result " | This indicates that the machine uploads the execution result of the command to the server. |
 | d ev_id | Machine Identification Number | yes | English and numbers , maximum 24 characters | Reference 2.1.1 |
 | dev_model | Distinguish between equipment types | yes | English letters and numbers, maximum 16 digits | Reference 2.1.1 |
-| token​ | Device access token | yes | MD5( dev_id + key) | Reference 2.1.1 |
-| trans_id | Task Identifier | yes | English and numbers , maximum 16 characters | Reference 2.1.2​ |
+| token | Device access token | yes | MD5( dev_id + key) | Reference 2.1.1 |
+| trans_id | Task Identifier | yes | English and numbers , maximum 16 characters | Reference 2.1.2 |
 | cmd_return_code | Instruction result code | yes | English and numeric characters , maximum 64 bits | This indicates the result of the machine executing the instructions.<br>" OK " indicates successful execution .<br>" ERROR " string or a subsequent string indicating the unexpected occurred during execution. |
 
 The data placed in the body of this request varies depending on the instruction.
@@ -232,11 +236,11 @@ secret: The personnel secret issued in section 3.2.4
 | :--- | :--- |
 | GET_DEVICE_INFO | Obtain basic device information |
 | GET_USER_ID_LIST | Get User ID List |
-| SET_USER_INFO​ | Set user information |
+| SET_USER_INFO | Set user information |
 | GET_USER_INFO | Obtaining user information |
 | DELETE_ USER | Delete user |
 | GET_LOG_DATA | Retrieve machine records by time |
-| CLEAR_LOG_DATA​​ | Clear all attendance records on the device |
+| CLEAR_LOG_DATA | Clear all attendance records on the device |
 | SET_TIME | Synchronize device time |
 | RESET_FK | Restart the device |
 | UPDATE_FIRMWARE | Upgrade device firmware |
@@ -265,11 +269,11 @@ token: EE5F15B6AF14992F1D9E741397DA6A72
 
 -- HTTP body –
 
+```json
 {
-
-" time " : " 201910010645 "​
-
+  " time " : " 201910010645 "
 }
+```
 
 Server response (If the server has no instructions to send to the device, it sends an ERROR_NO_CMD response to the device. This response has no body and some header content is omitted; see section 2.6 for details.)
 
@@ -315,59 +319,35 @@ cmd_return_code : OK
 
 -- HTTP body –
 
+```json
 {
-
-" name " : " Device name " ,
-
-" deviceId " : " device ID "
-
-" firmware " : " firmware name " ,
-
-" fp V er " : "FP_128" ,
-
-" f aceV er " : "FACE _D_100 " ,
-
-"pvVer":"PV_100",
-
-"maxBufferLen":92160,
-
-"userLimit":3000,
-
-"fpLimit":10000,
-
-"faceLimit":3000,
-
-"pvLimit":3000,
-
-"pwdLimit":3000,
-
-"cardLimit":3000,
-
-"logLimit":200000,
-
-"userCount":1234,
-
-"managerCount":2,
-
-"fpCount":1111,
-
-"faceCount":123,
-
-"pvCount":123,
-
-"pwdCount":456,
-
-"cardCount":789,
-
-"log quont " : 1234,
-
-" allL og C ount" : 6666,
-
-" supportACL " : 1,
-
-" supportShift " : 0,
-
+  " name " : " Device name " ,
+  " deviceId " : " device ID "
+  " firmware " : " firmware name " ,
+  " fp V er " : "FP_128" ,
+  " f aceV er " : "FACE _D_100 " ,
+  "pvVer":"PV_100",
+  "maxBufferLen":92160,
+  "userLimit":3000,
+  "fpLimit":10000,
+  "faceLimit":3000,
+  "pvLimit":3000,
+  "pwdLimit":3000,
+  "cardLimit":3000,
+  "logLimit":200000,
+  "userCount":1234,
+  "managerCount":2,
+  "fpCount":1111,
+  "faceCount":123,
+  "pvCount":123,
+  "pwdCount":456,
+  "cardCount":789,
+  "log quont " : 1234,
+  " allL og C ount" : 6666,
+  " supportACL " : 1,
+  " supportShift " : 0,
 }
+```
 
 Server-side confirmation (subsequent server responses to send_cmd_result will follow this pattern, with no body section and the header content omitted; see section 2.8 for details).
 
@@ -400,7 +380,7 @@ Parameter Explanation
 | f aceC ount | no | Current number of faces |
 | pvC ount | no | Current number of palm prints |
 | p wdC ount | no | Current number of passwords |
-| card Coupon​ | no | Current number of cards |
+| card Coupon | no | Current number of cards |
 | log C ount | yes | Current record count |
 | allL og C ount | yes | Total number of records |
 | supportACL | no | Does it support professional access control? |
@@ -434,15 +414,13 @@ cmd_return_code:OK
 
 -- HTTP body --
 
+```json
 {
-
-"packageId":1,
-
-"usersCount":1234,
-
-" usersId " :[ " 1 " , " 2 " , " 3 " ,...]
-
+  "packageId":1,
+  "usersCount":1234,
+  " usersId " :[ " 1 " , " 2 " , " 3 " ,...]
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -480,43 +458,27 @@ cmd_code: SET_USER_INFO
 
 -- HTTP body --
 
+```json
 {
-
-"users":[{
-
-"userId":"1234",
-
-"name":"John Doe",
-
-"privilege":0,
-
-"card":"123456",
-
-"pwd":"666",
-
-"fps":["base64_0"," base64_1",...," base64_9"],
-
-"face":"base64",
-
-"palm":["base64_0"," base64_1"],
-
-"photo":"base64",
-
-"vaildStart":"yyyyMMdd",
-
-"vaildEnd":"yyyyMMdd",
-
-"update":1,
-
-"photoEnroll":1,
-
-"secret":""
-
-"identityCard":"440183197310203556"
-
-},...]
-
+  "users":[{
+      "userId":"1234",
+      "name":"John Doe",
+      "privilege":0,
+      "card":"123456",
+      "pwd":"666",
+      "fps":["base64_0"," base64_1",...," base64_9"],
+      "face":"base64",
+      "palm":["base64_0"," base64_1"],
+      "photo":"base64",
+      "vaildStart":"yyyyMMdd",
+      "vaildEnd":"yyyyMMdd",
+      "update":1,
+      "photoEnroll":1,
+      "secret":""
+      "identityCard":"440183197310203556"
+    },...]
 }
+```
 
 Device Response
 
@@ -530,13 +492,12 @@ cmd_return_code:OK
 
 -- HTTP body --
 
+```json
 {
-
-" usersId " :[ " 1 " , " 2 " , " 3 " ...],
-
-" failCode " : [1,2,3...]
-
+  " usersId " :[ " 1 " , " 2 " , " 3 " ...],
+  " failCode " : [1,2,3...]
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -554,7 +515,7 @@ Parameter Explanation
 | user ID | yes | User ID |
 | name | no | username |
 | privilege | no | User permissions : 0 represents a regular user, 1 represents an administrator. |
-| card​ | no | card number |
+| card | no | card number |
 | pwd | no | password |
 | fps | no | Fingerprint data array , binary data , represented using base64 . |
 | face | no | Face data , binary data , represented using base64 . |
@@ -583,15 +544,15 @@ response_code: OK
 
 trans_id: 100
 
-cmd_code: GET_USER_INFO​​
+cmd_code: GET_USER_INFO
 
 -- HTTP body -- ( usersId can be empty , but the body field cannot be empty , i.e., it can be an empty JSON object {})
 
+```json
 {
-
-" usersId " :[ " 1 " , " 2 " , " 3 " ...]
-
+  " usersId " :[ " 1 " , " 2 " , " 3 " ...]
 }
+```
 
 Equipment response
 
@@ -605,57 +566,34 @@ cmd_return_code:OK
 
 -- HTTP body --
 
+```json
 {
-
-"packageId":1,
-
-"usersCount":5
-
-"users":[ {
-
-"userId":"1",
-
-"name":"John Doe",
-
-"privilege":0
-
-"card":"123456"
-
-"pwd":"666"
-
-"fps":["base64_0"," base64_1",...," base64_9"],
-
-"face":"base64",
-
-"palm":["base64_0"," base64_1"],
-
-"photo":"base64",
-
-"vaildStart":"yyyyMMdd",
-
-"vaildEnd":"yyyyMMdd",
-
-"timeGroups":{
-
-"sun":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"mon":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"tue":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"wed":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"thu":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"fri":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-" sat " :HmmHHmm " , " HHmmHHmm " , " HHmmHHmm " , " HHmmHHmm " , " HHmmHHmm " , " HHmmHHmm " ]
-
+  "packageId":1,
+  "usersCount":5
+  "users":[ {
+      "userId":"1",
+      "name":"John Doe",
+      "privilege":0
+      "card":"123456"
+      "pwd":"666"
+      "fps":["base64_0"," base64_1",...," base64_9"],
+      "face":"base64",
+      "palm":["base64_0"," base64_1"],
+      "photo":"base64",
+      "vaildStart":"yyyyMMdd",
+      "vaildEnd":"yyyyMMdd",
+      "timeGroups":{
+        "sun":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+        "mon":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+        "tue":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+        "wed":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+        "thu":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+        "fri":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+        " sat " :HmmHHmm " , " HHmmHHmm " , " HHmmHHmm " , " HHmmHHmm " , " HHmmHHmm " , " HHmmHHmm " ]
+      }
+    },...]
 }
-
-},...]
-
-}
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -694,13 +632,12 @@ cmd_code: DELETE_ USER
 
 -- HTTP body --
 
+```json
 {
-
-" usersCount " : 100,
-
-"usersId":["1","2","3"...]
-
+  " usersCount " : 100,
+  "usersId":["1","2","3"...]
 }
+```
 
 Device Response
 
@@ -714,11 +651,11 @@ cmd_return_code:OK
 
 -- HTTP body --
 
+```json
 {
-
-" usersId " :[ " 1 " , " 2 " , " 3 " ...]
-
+  " usersId " :[ " 1 " , " 2 " , " 3 " ...]
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -749,15 +686,15 @@ response_code: OK
 
 trans_id: 100
 
-cmd_code: GET_LOG_DATA​​
+cmd_code: GET_LOG_DATA
 
 -- HTTP body – ( beginTime and endTime can be empty , but the body cannot be empty , meaning it can be an empty JSON object {} )
 
+```json
 {
-
-"newLog":0 , " begin T ime ":" yyyyMMdd "," end T ime ":" yyyyMMdd ","clearMark":0
-
+  "newLog":0 , " begin T ime ":" yyyyMMdd "," end T ime ":" yyyyMMdd ","clearMark":0
 }
+```
 
 Equipment response
 
@@ -771,53 +708,32 @@ cmd_return_code:OK
 
 -- HTTP body --
 
+```json
 {
-
-"packageId":0,
-
-"allLogCount":26,
-
-"logsCount":26
-
-"logs":[{
-
-"userId":"1",
-
-"time":"yyyyMMddHHmmss",
-
-"verifyMode":"Card+Face",
-
-"ioMode":1,
-
-"inOut":"In",
-
-"doorMode":"hand_open",
-
-"temperature":37.1,
-
-"logPhoto":"Base64",
-
-"IDCard":{
-
-"ID":"123456202001011234",
-
-"name":"John Doe",
-
-"birthDay":"yyyyMMdd",
-
-"address":"AAABBB",
-
-"nation":1,
-
-"sex":1,
-
-"photo":"Base64",
-
+  "packageId":0,
+  "allLogCount":26,
+  "logsCount":26
+  "logs":[{
+      "userId":"1",
+      "time":"yyyyMMddHHmmss",
+      "verifyMode":"Card+Face",
+      "ioMode":1,
+      "inOut":"In",
+      "doorMode":"hand_open",
+      "temperature":37.1,
+      "logPhoto":"Base64",
+      "IDCard":{
+        "ID":"123456202001011234",
+        "name":"John Doe",
+        "birthDay":"yyyyMMdd",
+        "address":"AAABBB",
+        "nation":1,
+        "sex":1,
+        "photo":"Base64",
+      }
+    },...]
 }
-
-},...]
-
-}
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -834,7 +750,7 @@ Parameter Explanation
 | Field | Required | illustrate |
 | :--- | :--- | :--- |
 | newLog | no | Should a new record be created? 1: Yes, the time period will be ignored and record flags will be cleared; 0: No, the default is 0. |
-| begin Time​ | no | Start time ; if this field does not exist, it represents all data up to the end time. |
+| begin Time | no | Start time ; if this field does not exist, it represents all data up to the end time. |
 | endTime | no | End time ; if this field does not exist, it represents all data after the start time. |
 | clearMark | no | Whether to clear the record flag for this time period. 0: No, 1: Yes, default is 0. |
 | packageId | yes | The data packet ID is used when the data to be uploaded is too large. The device will then divide the data into packets for transmission. The data packet ID starts from 1 and increments sequentially, with 0 indicating that all data has been transmitted. |
@@ -914,11 +830,11 @@ cmd_code: SET_TIME
 
 -- HTTP body --
 
+```json
 {
-
-" syncTime " : " yyyyMMddHHmmss "
-
+  " syncTime " : " yyyyMMddHHmmss "
 }
+```
 
 Equipment response
 
@@ -982,11 +898,11 @@ cmd_code: UPDATE_FIRMWARE
 
 -- HTTP body --
 
+```json
 {
-
-" firmwareFIleURL " : " www.xxx.com/xxxx.bin "
-
+  " firmwareFIleURL " : " www.xxx.com/xxxx.bin "
 }
+```
 
 Equipment response
 
@@ -1054,13 +970,12 @@ cmd_code: ENTER_ENROLL
 
 -- HTTP body --
 
+```json
 {
-
-userId : " 666 " ,​​
-
-" face "​​​​
-
+  userId : " 666 " ,
+  " face "
 }
+```
 
 Equipment response
 
@@ -1105,17 +1020,14 @@ cmd_code: SET_DEVICE_SETTING
 
 -- HTTP body – (See parameter list for detailed settings)
 
+```json
 {
-
-" xxx " : " xxx " ,
-
-" xxxx " :{
-
-" xx " : " xx "
-
+  " xxx " : " xxx " ,
+  " xxxx " :{
+    " xx " : " xx "
+  }
 }
-
-}
+```
 
 Equipment response
 
@@ -1199,17 +1111,14 @@ cmd_return_code : OK
 
 -- HTTP body – (The returned parameter list is the same as SET_DEVICE_SETTING)
 
+```json
 {
-
-" xxx " : " xxx " ,
-
-" xxxx " :{
-
-" xx " : " xx "
-
+  " xxx " : " xxx " ,
+  " xxxx " :{
+    " xx " : " xx "
+  }
 }
-
-}
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -1279,11 +1188,11 @@ cmd_code: SET_DOOR_STATUS
 
 -- HTTP body --
 
+```json
 {
-
-" doorStatus " : " open_close "
-
+  " doorStatus " : " open_close "
 }
+```
 
 Equipment response
 
@@ -1361,11 +1270,11 @@ cmd_code: RESET_LOG_MARK
 
 -- HTTP body -- ( beginTime and endTime can be empty , but the body cannot be empty , meaning it can be an empty JSON object { } )
 
+```json
 {
-
-" begin T ime ":" yyyyMMdd "," end T ime ":" yyyyMMdd "
-
+  " begin T ime ":" yyyyMMdd "," end T ime ":" yyyyMMdd "
 }
+```
 
 Equipment response
 
@@ -1389,7 +1298,7 @@ Parameter Explanation
 
 | Field | Required | illustrate |
 | :--- | :--- | :--- |
-| begin Time​ | no | Start time ; if this field does not exist, it represents all data up to the end time. |
+| begin Time | no | Start time ; if this field does not exist, it represents all data up to the end time. |
 | endTime | no | End time ; if this field does not exist, it represents all data after the start time. |
 
 #### SET_USERS_TIME_GROUPS (Sets the user access control time period )
@@ -1410,27 +1319,19 @@ cmd_code: SET_USERS_TIME_GROUPS
 
 -- HTTP body --
 
+```json
 {
-
-"usersId":["1","2","3"...],
-
-"timeGroups":{
-
-"sun":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"mon":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"tue":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"wed":["HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"thu":["HHmmHHmm","HHmmHHmm"],
-
-"fri":["HHmmHHmm"]
-
+  "usersId":["1","2","3"...],
+  "timeGroups":{
+    "sun":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "mon":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "tue":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "wed":["HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "thu":["HHmmHHmm","HHmmHHmm"],
+    "fri":["HHmmHHmm"]
+  }
 }
-
-}
+```
 
 Device Response
 
@@ -1444,11 +1345,11 @@ cmd_return_code:OK
 
 -- HTTP body --
 
+```json
 {
-
-" usersId " :[ " 1 " , " 2 " , " 3 " ...]
-
+  " usersId " :[ " 1 " , " 2 " , " 3 " ...]
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -1490,13 +1391,12 @@ cmd_code: SET_AUTHKEY
 
 -- HTTP body --
 
+```json
 {
-
-" key " : " 79853C9C3CBF326EF77A8CD92675BD82766AD13FE932B10575514E267633A097 " ,
-
-" cardSector " : 1
-
+  " key " : " 79853C9C3CBF326EF77A8CD92675BD82766AD13FE932B10575514E267633A097 " ,
+  " cardSector " : 1
 }
+```
 
 Equipment response
 
@@ -1541,15 +1441,13 @@ cmd_code: OPEN_DOOR
 
 -- HTTP body --
 
+```json
 {
-
-" opType ": " open " , // open (on), close (off), keep_open (always open), keep_close (always closed), cancel_keep (cancel always open/always closed)
-
-" op Time " : " yyyyMMddHHmmss "// Message sending time
-
-" expireSeconds ": 60 // Valid seconds, 60 (default value, numeric type)
-
+  " opType ": " open " , // open (on), close (off), keep_open (always open), keep_close (always closed), cancel_keep (cancel always open/always closed)
+  " op Time " : " yyyyMMddHHmmss "// Message sending time
+  " expireSeconds ": 60 // Valid seconds, 60 (default value, numeric type)
 }
+```
 
 Equipment response
 
@@ -1595,19 +1493,15 @@ cmd_code : SET_BELL_DATA
 
 -- HTTP body --
 
+```json
 {
-
-" bellList":[
-
-{"no":"1","time":"0000","valid":"0"},
-
-{"no":"2","time":"0000","valid":"0"},
-
-{"no":"24","time":"0000","valid":"0"}
-
-]
-
+  " bellList":[
+    {"no":"1","time":"0000","valid":"0"},
+    {"no":"2","time":"0000","valid":"0"},
+    {"no":"24","time":"0000","valid":"0"}
+  ]
 }
+```
 
 Device Response
 
@@ -1652,19 +1546,15 @@ trans_id:100
 
 cmd_code: GET_BELL_DATA
 
+```json
 {
-
-"bellList":[
-
-{"no":"1","time":"0000","valid":"0"},
-
-{"no":"2","time":"0000","valid":"0"},
-
-{"no":"24","time":"0000","valid":"0"}
-
-]
-
+  "bellList":[
+    {"no":"1","time":"0000","valid":"0"},
+    {"no":"2","time":"0000","valid":"0"},
+    {"no":"24","time":"0000","valid":"0"}
+  ]
 }
+```
 
 Device Response
 
@@ -1711,19 +1601,15 @@ cmd_code:SET_MQTT_PARAM
 
 -- HTTP body --
 
+```json
 {
-
-IP address : 192.0.2.10​​
-
-" port ": 1883,
-
-" userName ":" mqttUser " ,
-
-" pwd ":" 111111 " ,
-
-" serverTopic ":" kq /server "
-
+  IP address : 192.0.2.10
+  " port ": 1883,
+  " userName ":" mqttUser " ,
+  " pwd ":" 111111 " ,
+  " serverTopic ":" kq /server "
 }
+```
 
 Equipment response
 
@@ -1771,25 +1657,18 @@ cmd_code: SET_PHOTO_FILE
 
 -- HTTP body --
 
+```json
 {
-
-"data":[
-
-{
-
-"photo":"PhotoBase64",
-
-},
-
-{
-
-"photo":"PhotoBase64",
-
-},
-
-]
-
+  "data":[
+    {
+      "photo":"PhotoBase64",
+    },
+    {
+      "photo":"PhotoBase64",
+    },
+  ]
 }
+```
 
 Device Response
 
@@ -1829,29 +1708,22 @@ response_code: OK
 
 trans_id: 100
 
-cmd_code: SET_KEEP_PARAMS​​​
+cmd_code: SET_KEEP_PARAMS
 
 -- HTTP body --
 
+```json
 {
-
-type: " keep_open or keep_close, keep_off " // Normally open/normally closed type keep_off disables normally open
-
-rule:{"sun":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"mon":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"tue":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"wed":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"thu":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"fri":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
-
-"sat":HmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"]}
-
-}
+  type: " keep_open or keep_close, keep_off " // Normally open/normally closed type keep_off disables normally open
+  rule:{"sun":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "mon":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "tue":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "wed":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "thu":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "fri":["HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"],
+    "sat":HmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm","HHmmHHmm"]}
+  }
+```
 
 Device Response
 
@@ -1903,39 +1775,25 @@ cmd_code: SET_USER_ELEVATOR_RULE
 
 -- HTTP body -- ( beginTime and endTime can be empty , but the body cannot be empty , meaning it can be an empty JSON object { } )
 
+```json
 {
-
-" userIds ": [ " 123456 "," 456 " , … ],
-
-"ruleType":"clear", // clear, add, remove
-
-"setRules":[{
-
-ruleId: 123
-
-beginDate: "yyyyMMdd",
-
-endDate: "yyyyMMdd",
-
-passTimes:["HHmmHHmm","HHmmHHmm"]
-
-layers: [1,2,3,-1]
-
-},{
-
-ruleId: 124
-
-beginDate: " yyyyMMdd " ,
-
-endDate: " yyyyMMdd " ,
-
-passTimes:[ " HHmmHHmm " , " HHmmHHmm " ]
-
-layers: [1,2,3,-1]
-
-}],
-
-removeRuleIds:[1,2,3]}
+  " userIds ": [ " 123456 "," 456 " , … ],
+  "ruleType":"clear", // clear, add, remove
+  "setRules":[{
+      ruleId: 123
+      beginDate: "yyyyMMdd",
+      endDate: "yyyyMMdd",
+      passTimes:["HHmmHHmm","HHmmHHmm"]
+      layers: [1,2,3,-1]
+    },{
+      ruleId: 124
+      beginDate: " yyyyMMdd " ,
+      endDate: " yyyyMMdd " ,
+      passTimes:[ " HHmmHHmm " , " HHmmHHmm " ]
+      layers: [1,2,3,-1]
+  }],
+  removeRuleIds:[1,2,3]}
+```
 
 Equipment response
 
@@ -1982,19 +1840,15 @@ cmd_code: SET_ELEVATOR_ LAYERS
 
 -- HTTP body -- ( However , the body field cannot be empty ; it can be an empty array [])
 
+```json
 [{
-
-"floor": 1, "display":"B1", "control": 1
-
-},
-
-"floor": 2, "display":"F1", "control": 0
-
+    "floor": 1, "display":"B1", "control": 1
+  },
+  "floor": 2, "display":"F1", "control": 0
 },{
-
-" floor " : 3, " display " : " A2 " , " control " : 1
-
+  " floor " : 3, " display " : " A2 " , " control " : 1
 }]
+```
 
 Equipment response
 
@@ -2040,11 +1894,10 @@ cmd_code: TRANSMISSION
 
 -- HTTP body -- ( However , the body field cannot be empty ; it can be an empty array [])
 
+```json
 {
-
-"transmission":"ABCD" }
-
-}
+  "transmission":"ABCD" }
+```
 
 Equipment response
 
@@ -2076,6 +1929,8 @@ notification of the WEB server when certain events occur on the device . Real-ti
 
 This includes the ability to record and transmit data in real time .
 
+![FL5 Attendance & Access Control HTTP Protocol Specification - fl5-image3.png](./images/fl5-image3.png)
+
 ### 4.1 Real-time attendance record transmission
 
 Real-time recording and transmission refers to the function of actively pushing new records to the server when they are generated on the machine .
@@ -2084,29 +1939,22 @@ Device push
 
 -- HTTP header --
 
-request_code: realtime_g log​
+request_code: realtime_g log
 
 -- HTTP body --
 
+```json
 {
-
-" u ser I d":"1",
-
-"time":"yyyyMMddHHmmss",
-
-"verifyMode":"Card+Face",
-
-"ioMode":1,
-
-"inOut":"In",
-
-"doorMode":"hand_open",
-
-"temperature":37.1,
-
-"logPhoto":"Base64"
-
+  " u ser I d":"1",
+  "time":"yyyyMMddHHmmss",
+  "verifyMode":"Card+Face",
+  "ioMode":1,
+  "inOut":"In",
+  "doorMode":"hand_open",
+  "temperature":37.1,
+  "logPhoto":"Base64"
 }
+```
 
 Server Acknowledgment (see Section 2.8)
 
@@ -2128,15 +1976,15 @@ Device push
 
 -- HTTP header --
 
-request_code: realtime_door_status​
+request_code: realtime_door_status
 
 -- HTTP body --
 
+```json
 {
-
-" doorStatus ":" open "
-
+  " doorStatus ":" open "
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -2164,31 +2012,21 @@ request_code: realtime_enroll_data
 
 -- HTTP body --
 
+```json
 {
-
-"userId":"1",
-
-"name":"John Doe",
-
-"privilege":0
-
-"card":"123456"
-
-"pwd":"666"
-
-"fps":["base64_0"," base64_1",...," base64_9"],
-
-"face":"base64",
-
-"palm":["base64_0"," base64_1"]
-
-"photo":"base64"
-
-"vaildStart":"yyyyMMddHHmmss"
-
-" vaildEnd " : " yyyyMMddHHmmss "
-
+  "userId":"1",
+  "name":"John Doe",
+  "privilege":0
+  "card":"123456"
+  "pwd":"666"
+  "fps":["base64_0"," base64_1",...," base64_9"],
+  "face":"base64",
+  "palm":["base64_0"," base64_1"]
+  "photo":"base64"
+  "vaildStart":"yyyyMMddHHmmss"
+  " vaildEnd " : " yyyyMMddHHmmss "
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -2212,15 +2050,13 @@ request_code: door_visit
 
 -- HTTP body --
 
+```json
 {
-
-" user ID " : " 1 " ,​
-
-" visitId " : 1 , // Access identifier, the same as the access identifier (int type) in Section 3.2.4 .
-
-" time " : " yyyyMMddHHmmss "
-
+  " user ID " : " 1 " ,
+  " visitId " : 1 , // Access identifier, the same as the access identifier (int type) in Section 3.2.4 .
+  " time " : " yyyyMMddHHmmss "
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -2238,11 +2074,11 @@ request_code: door_visit_check
 
 -- HTTP body --
 
+```json
 {
-
-" visitId " : 1 , // Access identifier, the same as the access identifier (int type) in Section 3.2.4 .
-
+  " visitId " : 1 , // Access identifier, the same as the access identifier (int type) in Section 3.2.4 .
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -2260,11 +2096,11 @@ request_code: pass_online_check
 
 -- HTTP body --
 
+```json
 {
-
-" userId " : " 123 " , // Registration number
-
+  " userId " : " 123 " , // Registration number
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -2284,17 +2120,14 @@ request_code: Opera_glog
 
 -- HTTP body --
 
+```json
 {
-
-" u ser I d":"1",
-
-" time ":"yyyyMMddHHmmss",
-
-"operationId":"1",
-
-"operationValue":"",
-
+  " u ser I d":"1",
+  " time ":"yyyyMMddHHmmss",
+  "operationId":"1",
+  "operationValue":"",
 }
+```
 
 Server-side confirmation (see 2.8 for details)
 
@@ -2317,15 +2150,13 @@ The MQTT protocol is currently mainly used by servers to send remote door openin
 
 mqtt command format:
 
+```json
 {
-
-" transId " : Instruction sequence number, data type: long.
-
-" cmd_code " : Command type, Data type: string
-
-" cmd_param " : Command parameters: Data parameters in JSON format
-
+  " transId " : Instruction sequence number, data type: long.
+  " cmd_code " : Command type, Data type: string
+  " cmd_param " : Command parameters: Data parameters in JSON format
 }
+```
 
 #### The server issues an MQTT command.
 
@@ -2335,15 +2166,13 @@ cmd_code: open_door
 
 cmd_param:
 
+```json
 {
-
-" opType ": " open " , // open (on), close (off), keep_open (always open), keep_close (always closed), cancel_keep (cancel always open/always closed)
-
-" op Time " : " yyyyMMddHHmmss "// Message sending time
-
-" expireSeconds ": 15 // Valid seconds, 15 (default value, numeric type)
-
+  " opType ": " open " , // open (on), close (off), keep_open (always open), keep_close (always closed), cancel_keep (cancel always open/always closed)
+  " op Time " : " yyyyMMddHHmmss "// Message sending time
+  " expireSeconds ": 15 // Valid seconds, 15 (default value, numeric type)
 }
+```
 
 #### SET_USER_ELEVATOR_RULE (Sets elevator access rules, equivalent to 3.2.28 )
 
@@ -2351,39 +2180,25 @@ cmd_code: SET_USER_ELEVATOR_RULE
 
 cmd_param:
 
+```json
 {
-
-"userIds":["123456","456",…] ,
-
-"ruleType":"clear", // clear, add, remove
-
-"setRules":[{
-
-ruleId: 123
-
-beginDate: "yyyyMMdd",
-
-endDate: " yyyyMMdd " ,
-
-passTimes:[ " HHmmHHmm " , " HHmmHHmm " ]
-
-layers: [1,2,3,-1]
-
-},{
-
-ruleId: 124
-
-startDate: " yyyyMMdd " ,
-
-endDate: " yyyyMMdd " ,
-
-passTimes:[ " HHmmHHmm " , " HHmmHHmm " ]
-
-layers: [1,2,3,-1]
-
-}],
-
-removeRuleIds:[1,2,3]}
+  "userIds":["123456","456",…] ,
+  "ruleType":"clear", // clear, add, remove
+  "setRules":[{
+      ruleId: 123
+      beginDate: "yyyyMMdd",
+      endDate: " yyyyMMdd " ,
+      passTimes:[ " HHmmHHmm " , " HHmmHHmm " ]
+      layers: [1,2,3,-1]
+    },{
+      ruleId: 124
+      startDate: " yyyyMMdd " ,
+      endDate: " yyyyMMdd " ,
+      passTimes:[ " HHmmHHmm " , " HHmmHHmm " ]
+      layers: [1,2,3,-1]
+  }],
+  removeRuleIds:[1,2,3]}
+```
 
 Parameter Explanation
 
@@ -2400,19 +2215,15 @@ cmd_code: SET_ELEVATOR_LAYERS
 
 cmd_param:
 
+```json
 [{
-
-"floor": 1, "display":"B1", "control": 1
-
-},
-
-"floor": 2, "display":"F1", "control": 0
-
+    "floor": 1, "display":"B1", "control": 1
+  },
+  "floor": 2, "display":"F1", "control": 0
 },{
-
-" floor " : 3, " display " : " A2 " , " control " : 1
-
+  " floor " : 3, " display " : " A2 " , " control " : 1
 }]
+```
 
 Parameter Explanation
 
@@ -2428,21 +2239,18 @@ After the device completes the MQTT processing, it sends the processing result t
 
 mqtt command format:
 
+```json
 {
-
-" transId " : 123456,
-
-" deviceId " : " serial number "
-
-" token " : " xxxxxxx " ,
-
-" cmd_return_code " : " OK "
-
+  " transId " : 123456,
+  " deviceId " : " serial number "
+  " token " : " xxxxxxx " ,
+  " cmd_return_code " : " OK "
 }
+```
 
 | field name | Field meaning | Required fields | Data types | Detailed description |
 | :--- | :--- | :--- | :--- | :--- |
-| transId | Instruction number | yes | long​ | transId when issuing commands |
+| transId | Instruction number | yes | long | transId when issuing commands |
 | deviceId | Device Identification Number | yes | string | English and numbers , maximum 24 characters |
 | token | Device access token | yes | string | MD5(dev_id + key) |
 | cmd_return_code | Instruction result code | yes | string | English and numeric characters , maximum 64 bits<br>This indicates the result of the device executing the instructions.<br>" OK " indicates successful execution .<br>" ERROR " string or a subsequent string indicating the unexpected occurred during execution. |
