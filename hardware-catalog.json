@@ -1,0 +1,180 @@
+{
+  "organization": "SUNTEK Technology Co., Ltd.",
+  "website": "https://www.suntekai.com",
+  "support_email": "support@suntekai.com",
+  "updated": "2026-11-18",
+  "models": {
+    "SC1": {
+      "category": "Desktop POS",
+      "sdk_repo": "suntek-sdk-sc1-sk1",
+      "variants": [
+        "GMS",
+        "Non-GMS"
+      ],
+      "signing": "Standard App Key (System Service IPC) / Companion SuntekBridgeService.apk"
+    },
+    "SC5": {
+      "category": "Desktop POS",
+      "sdk_repo": "suntek-sdk-sc5-sk6",
+      "variants": [
+        "Standard",
+        "WS2812B LED"
+      ],
+      "signing": "Standard App Key (System Service IPC) / Companion SuntekBridgeService.apk"
+    },
+    "ST5": {
+      "category": "Desktop POS / Ticket Validator",
+      "sdk_repo": "suntek-sdk-st5",
+      "variants": [
+        "Android 14",
+        "CAN / Display"
+      ],
+      "signing": "Standard App Key (System Service IPC) / Companion SuntekBridgeService.apk"
+    },
+    "FL5": {
+      "category": "Attendance / Access",
+      "sdk_repo": "suntek-docs",
+      "variants": [
+        "HTTP BS Protocol"
+      ],
+      "signing": "Network Protocol Only (No App Signing Needed)"
+    },
+    "N150": {
+      "category": "Tablet POS (Win)",
+      "sdk_repo": "suntek-docs",
+      "variants": [
+        "Windows 11 Drivers"
+      ],
+      "signing": "EV Signed Windows Drivers in Releases"
+    },
+    "SK1": {
+      "category": "Self-Service Kiosk",
+      "sdk_repo": "suntek-sdk-sc1-sk1",
+      "variants": [
+        "GMS",
+        "Non-GMS"
+      ],
+      "signing": "Standard App Key (System Service IPC) / Companion SuntekBridgeService.apk"
+    },
+    "SK1-15": {
+      "category": "Self-Service Kiosk",
+      "sdk_repo": "suntek-sdk-sc1-sk1",
+      "variants": [
+        "15.6-inch GMS/Non-GMS"
+      ],
+      "signing": "Standard App Key (System Service IPC) / Companion SuntekBridgeService.apk"
+    },
+    "SK5": {
+      "category": "Self-Service Kiosk",
+      "sdk_repo": "suntek-sdk-sk5-fingerprint",
+      "variants": [
+        "Android",
+        "Windows VirtualCom"
+      ],
+      "signing": "Standard App Key (USB Host)"
+    },
+    "SK6": {
+      "category": "Self-Service Kiosk",
+      "sdk_repo": "suntek-sdk-sc5-sk6",
+      "variants": [
+        "Standard",
+        "WS2812B LED"
+      ],
+      "signing": "Standard App Key (System Service IPC) / Companion SuntekBridgeService.apk"
+    },
+    "SK7": {
+      "category": "Self-Service Kiosk",
+      "sdk_repo": "suntek-sdk-sk7",
+      "variants": [
+        "Android System & IO"
+      ],
+      "signing": "Standard App Key / Companion SuntekBridgeService.apk"
+    },
+    "SK27-E": {
+      "category": "Self-Service Kiosk",
+      "sdk_repo": "suntek-docs",
+      "variants": [
+        "Contact Support for Dedicated Package"
+      ],
+      "signing": "Standard App Key / Enterprise Signing Support"
+    },
+    "SM1": {
+      "category": "Handheld Smart POS",
+      "sdk_repo": "suntek-sdk-sm1",
+      "variants": [
+        "EMV / Card / Printer"
+      ],
+      "signing": "Standard App Key (Preinstalled Payment Services)"
+    },
+    "SM6": {
+      "category": "Handheld Smart POS",
+      "sdk_repo": "suntek-sdk-sm6",
+      "variants": [
+        "EMV / Printer / UART / PINPad"
+      ],
+      "signing": "Standard App Key (Preinstalled Payment Services)"
+    },
+    "FA5": {
+      "category": "Biometric / Access",
+      "sdk_repo": "suntek-sdk-fa5",
+      "variants": [
+        "Android 13 GPIO / Relay"
+      ],
+      "signing": "Standard App Key / Companion SuntekBridgeService.apk"
+    },
+    "FA8": {
+      "category": "Biometric / Access",
+      "sdk_repo": "suntek-sdk-fa8-fa10",
+      "variants": [
+        "Android Wiegand / GPIO / Fill-Light"
+      ],
+      "signing": "Standard App Key / Companion SuntekBridgeService.apk"
+    },
+    "FA10": {
+      "category": "Biometric / Access",
+      "sdk_repo": "suntek-sdk-fa8-fa10",
+      "variants": [
+        "Android Wiegand / GPIO / Fill-Light"
+      ],
+      "signing": "Standard App Key / Companion SuntekBridgeService.apk"
+    },
+    "AI-Box": {
+      "category": "Edge AI Compute Box",
+      "sdk_repo": "suntek-sdk-aibox",
+      "variants": [
+        "Android 14 System APIs"
+      ],
+      "signing": "Standard App Key / Companion SuntekBridgeService.apk"
+    },
+    "SCP80": {
+      "category": "Thermal Printer",
+      "sdk_repo": "suntek-sdk-printer-scp80",
+      "variants": [
+        "Android",
+        "Windows",
+        "iOS",
+        "Linux CUPS"
+      ],
+      "signing": "No System Key Required"
+    },
+    "PV2": {
+      "category": "Cloud Audio Speaker",
+      "sdk_repo": "suntek-sdk-speaker-pv2",
+      "variants": [
+        "Embedded C SDK"
+      ],
+      "signing": "No App Signing Required"
+    },
+    "NFC": {
+      "category": "NFC Card Reader",
+      "sdk_repo": "suntek-sdk-nfc",
+      "variants": [
+        "Android",
+        "Linux",
+        "MCU",
+        "Web"
+      ],
+      "signing": "No System Key Required"
+    }
+  }
+}
