@@ -45,7 +45,7 @@
     <td width="50%" valign="top">
       <h3>Peripherals &amp; Serial LED</h3>
       <p>Barcode scanner fill-light control commands and Kiosk WS2812B / UART HEX control frames (<code>/dev/ttyS5</code>, 9600 bps).</p>
-      <a href="./docs/peripherals/scanner-fill-light-commands.md">Scanner Light</a> &middot; <a href="./docs/peripherals/kiosk-led-serial-hex-protocol.md">Kiosk LED HEX</a>
+      <a href="./docs/peripherals/scanner-fill-light-commands.md">Scanner Light</a> &middot; <a href="./docs/peripherals/kiosk-led-serial-hex-protocol.md">Kiosk LED HEX</a> &middot; <a href="https://github.com/SUNTEK-Official/suntek-peripherals-docs">Peripherals Suite</a>
     </td>
     <td width="50%" valign="top">
       <h3>Windows &amp; Linux Drivers</h3>
@@ -79,6 +79,7 @@ flowchart LR
 - [`docs/linux/ubuntu-cups-usb-thermal-printer.md`](./docs/linux/ubuntu-cups-usb-thermal-printer.md) — Ubuntu Linux CUPS raw USB printer setup guide
 - [`hardware-catalog.json`](./hardware-catalog.json) — Machine-readable model-to-SDK catalog
 - [`tools/fl5-protocol-mock-server/`](./tools/fl5-protocol-mock-server) — Python mock HTTP server for FL5 integration testing
+- [`suntek-peripherals-docs`](https://github.com/SUNTEK-Official/suntek-peripherals-docs) — Windows & Ubuntu integration guides, drivers, and samples for thermal printers, barcode scanners, and RGB LED controllers
 
 ---
 
